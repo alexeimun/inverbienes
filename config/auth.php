@@ -62,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Rhemo\Models\User::class,
+            'model' => Bienes\Models\User::class,
         ],
 
         // 'users' => [

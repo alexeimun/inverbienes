@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Traits;
+namespace Bienes\Traits;
 
 trait UserProfileTrait {
 
@@ -12,7 +12,7 @@ trait UserProfileTrait {
     }
 
     /**
-     * @return mixed|\Rhemo\Models\User
+     * @return mixed|\Bienes\Models\User
      */
     public function getCurrentUser() {
         return (object)app('auth')->user();

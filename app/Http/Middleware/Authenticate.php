@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Http\Middleware;
+namespace Bienes\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;

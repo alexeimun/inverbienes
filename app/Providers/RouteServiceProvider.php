@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Providers;
+namespace Bienes\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -13,7 +13,7 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @var string
      */
-    protected $namespace = 'Rhemo\Http\Controllers';
+    protected $namespace = 'Bienes\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -32,13 +32,6 @@ class RouteServiceProvider extends ServiceProvider {
      * @return void
      */
     protected function registerRoutes() {
-        //var_dump($this->app->group);exit;
-        //$this->app->group([
-        //    'namespace' => 'Rhemo\Http\Controllers',
-        //], function () {
-        //    require base_path('routes/web.php');
-        //});
-
         /*
          * Routes for version 1
          */
@@ -51,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider {
          * Routes for auth
          */
         Route::prefix('auth')
-            ->namespace('Rhemo\Http\Controllers\Auth')
+            ->namespace('Bienes\Http\Controllers\Auth')
             ->group(base_path('routes/routes-auth.php'));
 
         /*

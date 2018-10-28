@@ -1,9 +1,9 @@
 <?php
 
-namespace Rhemo\Http\Controllers;
+namespace Bienes\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
-use Rhemo\Repositories\Repository;
+use Bienes\Repositories\Repository;
 
 class Controller extends BaseController {
 
@@ -95,7 +95,7 @@ class Controller extends BaseController {
     /**
      * Gets the user profile
      *
-     * @return mixed|\Rhemo\Models\User
+     * @return mixed|\Bienes\Models\User
      */
     public function user() {
         return $this->request->user();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Console;
+namespace Bienes\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;

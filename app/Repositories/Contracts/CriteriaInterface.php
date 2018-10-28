@@ -1,10 +1,10 @@
 <?php
 
-namespace Rhemo\Repositories\Contracts;
+namespace Bienes\Repositories\Contracts;
 
 /**
  * Interface CriteriaInterface
- * @package Rhemo\Repositories\Contracts
+ * @package Bienes\Repositories\Contracts
  */
 interface CriteriaInterface
 {

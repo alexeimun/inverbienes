@@ -36,13 +36,8 @@ $app->configure('auth');
 $app->configure('cors');
 $app->configure('constants');
 $app->configure('ide-helper');
-$app->configure('mail');
-$app->configure('queue');
-$app->configure('services');
 
 app('translator')->setLocale('es');
-$app->make('queue');
-
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -56,12 +51,12 @@ $app->make('queue');
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Rhemo\Exceptions\Handler::class
+    Bienes\Exceptions\Handler::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    Rhemo\Console\Kernel::class
+    Bienes\Console\Kernel::class
 );
 
 /*
@@ -77,7 +72,7 @@ $app->singleton(
 
 $app->routeMiddleware([
     'cors' => Barryvdh\Cors\HandleCors::class,
-    'auth' => Rhemo\Http\Middleware\Authenticate::class,
+    'auth' => Bienes\Http\Middleware\Authenticate::class,
 ]);
 
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
@@ -101,19 +96,11 @@ $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 |
 */
 
-$app->register(Rhemo\Providers\AppServiceProvider::class);
+$app->register(Bienes\Providers\AppServiceProvider::class);
 $app->register(Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
-$app->register(Rhemo\Providers\AuthServiceProvider::class);
+$app->register(Bienes\Providers\AuthServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Barryvdh\Cors\ServiceProvider::class);
-$app->register(Illuminate\Mail\MailServiceProvider::class);
-$app->register(Rhemo\Providers\MailersServiceProvider::class);
-$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
-$app->register(OneSignalNotifier\OneSignal\OneSignalServiceProvider::class);
-//$app->register(\Illuminate\Queue\QueueServiceProvider::class);
-
-
-// $app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -129,7 +116,7 @@ $app->register(OneSignalNotifier\OneSignal\OneSignalServiceProvider::class);
 $app->router->group([
     'prefix' => 'v1',
     'middleware' => ['auth', 'cors'],
-    'namespace' => 'Rhemo\Http\Controllers',
+    'namespace' => 'Bienes\Http\Controllers',
 ], function ($router) {
     require __DIR__ . '/../routes/routes-v1.php';
 });
@@ -137,10 +124,9 @@ $app->router->group([
 $app->router->group([
     'middleware' => 'cors',
     'prefix' => 'auth',
-    'namespace' => 'Rhemo\Http\Controllers\Auth',
+    'namespace' => 'Bienes\Http\Controllers\Auth',
 ], function ($router) {
     require __DIR__ . '/../routes/routes-auth.php';
 });
-$app->router->get('','Rhemo\Http\Controllers\Auth\LandingController@version');
 
 return $app;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Exceptions;
+namespace Bienes\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;

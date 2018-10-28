@@ -1,12 +1,12 @@
 <?php
 
-namespace Rhemo\Repositories\Exceptions;
+namespace Bienes\Repositories\Exceptions;
 
 use Exception;
 
 /**
  * Class RepositoryException
- * @package Rhemo\Repositories\Exceptions
+ * @package Bienes\Repositories\Exceptions
  */
 class RepositoryException extends Exception{
 

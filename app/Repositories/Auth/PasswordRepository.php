@@ -1,11 +1,11 @@
 <?php
 
-namespace Rhemo\Repositories\Auth;
+namespace Bienes\Repositories\Auth;
 
-use Rhemo\Mail\Mailers;
-use Rhemo\Models\User;
-use Rhemo\Models\UserForgotPassword;
-use Rhemo\Repositories\Repository;
+use Bienes\Mail\Mailers;
+use Bienes\Models\User;
+use Bienes\Models\UserForgotPassword;
+use Bienes\Repositories\Repository;
 
 class PasswordRepository extends Repository {
 

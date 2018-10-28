@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Repositories\Contracts;
+namespace Bienes\Repositories\Contracts;
 
 interface RepositoryInterface {
 	

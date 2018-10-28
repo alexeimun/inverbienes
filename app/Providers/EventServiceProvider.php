@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Providers;
+namespace Bienes\Providers;
 
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
 
@@ -12,8 +12,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Rhemo\Events\SomeEvent' => [
-            'Rhemo\Listeners\EventListener',
+        'Bienes\Events\SomeEvent' => [
+            'Bienes\Listeners\EventListener',
         ],
     ];
 }

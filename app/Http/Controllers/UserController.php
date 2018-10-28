@@ -1,9 +1,9 @@
 <?php
 
-namespace Rhemo\Http\Controllers;
+namespace Bienes\Http\Controllers;
 
+use Bienes\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use Rhemo\Repositories\UserRepository;
 
 class UserController extends Controller {
 
@@ -11,19 +11,5 @@ class UserController extends Controller {
         $this->repository = $repository;
         $this->request = $request;
     }
-
-    public function editCurrentUser() {
-        return $this->response($this->repository->editCurrentUser($this->request->all()));
-    }
-
-    public function deactivate() {
-        return $this->response($this->repository->deactivate());
-    }
-
-    public function saveContact() {
-        $this->repository->saveContact($this->request->all());
-        return $this->response('ok');
-    }
-
 }
 

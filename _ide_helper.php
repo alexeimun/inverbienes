@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel Lumen (5.6.4) (Laravel Components 5.6.*) on 2018-08-09 11:44:07.
+ * Generated for Laravel Lumen (5.6.4) (Laravel Components 5.6.*) on 2018-09-24 21:12:03.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1087,7 +1087,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \Rhemo\Models\User|null 
+         * @return \Bienes\Models\User|null 
          * @static 
          */ 
         public static function user()
@@ -1099,7 +1099,7 @@ namespace Illuminate\Support\Facades {
          * Get the currently authenticated user or throws an exception.
          *
          * @throws \Tymon\JWTAuth\Exceptions\UserNotDefinedException
-         * @return \Rhemo\Models\User 
+         * @return \Bienes\Models\User 
          * @static 
          */ 
         public static function userOrFail()
@@ -1313,7 +1313,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \Rhemo\Models\User|null 
+         * @return \Bienes\Models\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -1347,7 +1347,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \Rhemo\Models\User 
+         * @return \Bienes\Models\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -1358,7 +1358,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
-         * @return \Rhemo\Models\User 
+         * @return \Bienes\Models\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -1421,6 +1421,58 @@ namespace Illuminate\Support\Facades {
         public static function setUser($user)
         {
             return \Tymon\JWTAuth\JWTGuard::setUser($user);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+            \Tymon\JWTAuth\JWTGuard::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin)
+        {
+            \Tymon\JWTAuth\JWTGuard::mixin($mixin);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+            return \Tymon\JWTAuth\JWTGuard::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+            return \Tymon\JWTAuth\JWTGuard::macroCall($method, $parameters);
         }
          
     }
@@ -2410,6 +2462,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param int|null $toLevel
          * @return void 
+         * @throws \Exception
          * @static 
          */ 
         public static function rollBack($toLevel = null)
@@ -3488,304 +3541,6 @@ namespace Illuminate\Support\Facades {
         public static function log($level, $message, $context = array())
         {
             \Illuminate\Log\LogManager::log($level, $message, $context);
-        }
-         
-    }
-
-    class Mail {
-        
-        /**
-         * Set the global from address and name.
-         *
-         * @param string $address
-         * @param string|null $name
-         * @return void 
-         * @static 
-         */ 
-        public static function alwaysFrom($address, $name = null)
-        {
-            \Illuminate\Mail\Mailer::alwaysFrom($address, $name);
-        }
-        
-        /**
-         * Set the global reply-to address and name.
-         *
-         * @param string $address
-         * @param string|null $name
-         * @return void 
-         * @static 
-         */ 
-        public static function alwaysReplyTo($address, $name = null)
-        {
-            \Illuminate\Mail\Mailer::alwaysReplyTo($address, $name);
-        }
-        
-        /**
-         * Set the global to address and name.
-         *
-         * @param string $address
-         * @param string|null $name
-         * @return void 
-         * @static 
-         */ 
-        public static function alwaysTo($address, $name = null)
-        {
-            \Illuminate\Mail\Mailer::alwaysTo($address, $name);
-        }
-        
-        /**
-         * Begin the process of mailing a mailable class instance.
-         *
-         * @param mixed $users
-         * @return \Illuminate\Mail\PendingMail 
-         * @static 
-         */ 
-        public static function to($users)
-        {
-            return \Illuminate\Mail\Mailer::to($users);
-        }
-        
-        /**
-         * Begin the process of mailing a mailable class instance.
-         *
-         * @param mixed $users
-         * @return \Illuminate\Mail\PendingMail 
-         * @static 
-         */ 
-        public static function bcc($users)
-        {
-            return \Illuminate\Mail\Mailer::bcc($users);
-        }
-        
-        /**
-         * Send a new message with only an HTML part.
-         *
-         * @param string $html
-         * @param mixed $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function html($html, $callback)
-        {
-            \Illuminate\Mail\Mailer::html($html, $callback);
-        }
-        
-        /**
-         * Send a new message when only a raw text part.
-         *
-         * @param string $text
-         * @param mixed $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function raw($text, $callback)
-        {
-            \Illuminate\Mail\Mailer::raw($text, $callback);
-        }
-        
-        /**
-         * Send a new message when only a plain part.
-         *
-         * @param string $view
-         * @param array $data
-         * @param mixed $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function plain($view, $data, $callback)
-        {
-            \Illuminate\Mail\Mailer::plain($view, $data, $callback);
-        }
-        
-        /**
-         * Render the given message as a view.
-         *
-         * @param string|array $view
-         * @param array $data
-         * @return string 
-         * @static 
-         */ 
-        public static function render($view, $data = array())
-        {
-            return \Illuminate\Mail\Mailer::render($view, $data);
-        }
-        
-        /**
-         * Send a new message using a view.
-         *
-         * @param string|array|\Illuminate\Mail\MailableContract $view
-         * @param array $data
-         * @param \Closure|string $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function send($view, $data = array(), $callback = null)
-        {
-            \Illuminate\Mail\Mailer::send($view, $data, $callback);
-        }
-        
-        /**
-         * Queue a new e-mail message for sending.
-         *
-         * @param string|array|\Illuminate\Mail\MailableContract $view
-         * @param string|null $queue
-         * @return mixed 
-         * @static 
-         */ 
-        public static function queue($view, $queue = null)
-        {
-            return \Illuminate\Mail\Mailer::queue($view, $queue);
-        }
-        
-        /**
-         * Queue a new e-mail message for sending on the given queue.
-         *
-         * @param string $queue
-         * @param string|array $view
-         * @return mixed 
-         * @static 
-         */ 
-        public static function onQueue($queue, $view)
-        {
-            return \Illuminate\Mail\Mailer::onQueue($queue, $view);
-        }
-        
-        /**
-         * Queue a new e-mail message for sending on the given queue.
-         * 
-         * This method didn't match rest of framework's "onQueue" phrasing. Added "onQueue".
-         *
-         * @param string $queue
-         * @param string|array $view
-         * @return mixed 
-         * @static 
-         */ 
-        public static function queueOn($queue, $view)
-        {
-            return \Illuminate\Mail\Mailer::queueOn($queue, $view);
-        }
-        
-        /**
-         * Queue a new e-mail message for sending after (n) seconds.
-         *
-         * @param \DateTimeInterface|\DateInterval|int $delay
-         * @param string|array|\Illuminate\Mail\MailableContract $view
-         * @param string|null $queue
-         * @return mixed 
-         * @static 
-         */ 
-        public static function later($delay, $view, $queue = null)
-        {
-            return \Illuminate\Mail\Mailer::later($delay, $view, $queue);
-        }
-        
-        /**
-         * Queue a new e-mail message for sending after (n) seconds on the given queue.
-         *
-         * @param string $queue
-         * @param \DateTimeInterface|\DateInterval|int $delay
-         * @param string|array $view
-         * @return mixed 
-         * @static 
-         */ 
-        public static function laterOn($queue, $delay, $view)
-        {
-            return \Illuminate\Mail\Mailer::laterOn($queue, $delay, $view);
-        }
-        
-        /**
-         * Get the view factory instance.
-         *
-         * @return \Illuminate\Contracts\View\Factory 
-         * @static 
-         */ 
-        public static function getViewFactory()
-        {
-            return \Illuminate\Mail\Mailer::getViewFactory();
-        }
-        
-        /**
-         * Get the Swift Mailer instance.
-         *
-         * @return \Swift_Mailer 
-         * @static 
-         */ 
-        public static function getSwiftMailer()
-        {
-            return \Illuminate\Mail\Mailer::getSwiftMailer();
-        }
-        
-        /**
-         * Get the array of failed recipients.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function failures()
-        {
-            return \Illuminate\Mail\Mailer::failures();
-        }
-        
-        /**
-         * Set the Swift Mailer instance.
-         *
-         * @param \Swift_Mailer $swift
-         * @return void 
-         * @static 
-         */ 
-        public static function setSwiftMailer($swift)
-        {
-            \Illuminate\Mail\Mailer::setSwiftMailer($swift);
-        }
-        
-        /**
-         * Set the queue manager instance.
-         *
-         * @param \Illuminate\Contracts\Queue\Factory $queue
-         * @return $this 
-         * @static 
-         */ 
-        public static function setQueue($queue)
-        {
-            return \Illuminate\Mail\Mailer::setQueue($queue);
-        }
-        
-        /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param object|callable $macro
-         * @return void 
-         * @static 
-         */ 
-        public static function macro($name, $macro)
-        {
-            \Illuminate\Mail\Mailer::macro($name, $macro);
-        }
-        
-        /**
-         * Mix another object into the class.
-         *
-         * @param object $mixin
-         * @return void 
-         * @throws \ReflectionException
-         * @static 
-         */ 
-        public static function mixin($mixin)
-        {
-            \Illuminate\Mail\Mailer::mixin($mixin);
-        }
-        
-        /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasMacro($name)
-        {
-            return \Illuminate\Mail\Mailer::hasMacro($name);
         }
          
     }
@@ -6317,8 +6072,6 @@ namespace  {
     class Hash extends \Illuminate\Support\Facades\Hash {}
 
     class Log extends \Illuminate\Support\Facades\Log {}
-
-    class Mail extends \Illuminate\Support\Facades\Mail {}
 
     class Queue extends \Illuminate\Support\Facades\Queue {}
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace Rhemo\Repositories;
+namespace Bienes\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Rhemo\Repositories\Contracts\CriteriaInterface;
-use Rhemo\Repositories\Contracts\RepositoryCriteriaInterface;
-use Rhemo\Repositories\Contracts\RepositoryInterface;
-use Rhemo\Traits\UserProfileTrait;
+use Bienes\Repositories\Contracts\CriteriaInterface;
+use Bienes\Repositories\Contracts\RepositoryCriteriaInterface;
+use Bienes\Repositories\Contracts\RepositoryInterface;
+use Bienes\Traits\UserProfileTrait;
 
 /**
  * Class Repository
- * @package Rhemo\Repositories\
+ * @package Bienes\Repositories\
  */
 abstract class Repository implements RepositoryInterface, RepositoryCriteriaInterface {
 
@@ -36,12 +36,6 @@ abstract class Repository implements RepositoryInterface, RepositoryCriteriaInte
      * @var bool
      */
     protected $skipCriteria = false;
-
-    /**
-     * @var $storage \Rhemo\Bridge\B2Storage
-     */
-
-    protected $storage = false;
 
     /**
      * Prevents from overwriting same criteria in chain usage
@@ -309,16 +303,6 @@ abstract class Repository implements RepositoryInterface, RepositoryCriteriaInte
      */
     public function softDelete($id) {
         $this->delete($id);
-    }
-
-    /**
-     * @return \Rhemo\Bridge\B2Storage
-     */
-    public function storage() {
-        if(!$this->storage)
-            $this->storage = app()->make('storage');
-
-        return $this->storage;
     }
 
     /**

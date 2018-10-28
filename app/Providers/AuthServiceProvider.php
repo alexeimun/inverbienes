@@ -1,6 +1,6 @@
 <?php
 
-namespace Rhemo\Providers;
+namespace Bienes\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
