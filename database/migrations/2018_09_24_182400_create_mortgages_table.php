@@ -23,6 +23,7 @@ class CreateMortgagesTable extends Migration {
             $table->enum('state', ['Vigente', 'Demandado', 'Cancelado'])->default('Vigente')->nullable();
             $table->integer('capital')->nullable();
             $table->integer('initial_balance')->nullable();
+            $table->integer('current_balance')->nullable();
             $table->integer('adjustment')->nullable();
             $table->integer('commission')->nullable();
             $table->integer('interest')->nullable();

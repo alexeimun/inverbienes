@@ -90,5 +90,14 @@ class MortgageRepository extends Repository {
     public function all($columns = ['*']) {
         return $this->model->with('promissory_notes')->get();
     }
+
+    public function transferMortgageDebtor($data) {
+        $this->model->find($data['mortgage_id'])->update(['debtor_id' => $data['debtor_id']]);
+    }
+
+    public function transferMortgageCreditor($data) {
+        $this->model->find($data['mortgage_id'])->update(['creditor_id' => $data['creditor_id']]);
+    }
+
 }
 

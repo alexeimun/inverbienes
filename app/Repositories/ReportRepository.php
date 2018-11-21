@@ -3,6 +3,7 @@
 namespace Bienes\Repositories;
 
 use Bienes\Misc\Enums\PaymentType;
+use Bienes\Models\Creditor;
 use Bienes\Models\Debtor;
 use Bienes\Models\Invoice;
 use Bienes\Models\Mortgage;
@@ -24,23 +25,30 @@ class ReportRepository extends Repository {
      * @var Movement
      */
     private $movement;
+    /**
+     * @var Creditor
+     */
+    private $creditor;
 
     /**
      * Create a new repository instance.
      *
      * @param Invoice $model
      * @param Debtor $debtor
+     * @param Creditor $creditor
      * @param Movement $movement
      * @param MortgageRepository $mortgageRepository
      */
     public function __construct(Invoice $model,
         Debtor $debtor,
+        Creditor $creditor,
         Movement $movement,
         MortgageRepository $mortgageRepository) {
         $this->model = $model;
         $this->debtor = $debtor;
         $this->mortgageRepository = $mortgageRepository;
         $this->movement = $movement;
+        $this->creditor = $creditor;
     }
 
     public function reportDebtor($id, $from, $to) {
@@ -55,6 +63,21 @@ class ReportRepository extends Repository {
             }])->without('debtor')->get();
         $report->debtor = $debtor->first();
         $this->mapMovements($report->mortgages);
+        return $report;
+    }
+
+    public function reportCreditor($id, $from, $to) {
+        $creditor = $this->creditor->find($id);
+        $report = new \stdClass;
+
+        $report->mortgages = $creditor->mortgages()
+            ->with(['movements' => function ($q) use ($from, $to) {
+                $q->whereYear('created_at', '>=', $from)
+                    ->whereYear('created_at', '<=', $to);
+                $q->select(['mortgage_id', 'value', 'consecutive', 'concept']);
+            }, 'debtor:id,name'])->without(['creditor', 'immovable'])
+            ->get(['id', 'creditor_id', 'fee_admin', 'debtor_id']);
+        $report->creditor = $creditor->first();
         return $report;
     }
 
@@ -109,8 +132,12 @@ class ReportRepository extends Repository {
         ];
     }
 
-    public function dailyBlock() {
-
+    public function dailyBlock($date) {
+        return $this->movement->with(['mortgage' => function ($q) {
+            $q->select(['id', 'fee_admin']);
+            $q->without(['immovable', 'creditor', 'debtor']);
+        }])->whereIn('type', [PaymentType::Commission, PaymentType::Interest, PaymentType::Payment])
+            ->whereDate('created_at', $date)->get(['mortgage_id', 'consecutive', 'type', 'value']);
     }
 
     public function dailyIncomes($date) {

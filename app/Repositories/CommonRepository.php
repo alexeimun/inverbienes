@@ -66,8 +66,8 @@ class CommonRepository extends Repository {
     public function nextToPay() {
         $list = new \stdClass;
 
-        $list->mortgages = $this->mortgage->whereDate('final_date', '>=', Carbon::now()->addDays(5))
-            ->select(['id', 'debtor_id', 'creditor_id', 'immovable_id', 'final_date'])
+        $list->mortgages = $this->mortgage->whereDate('final_date', '<=', Carbon::now()->addDays(5))
+            ->select(['id', 'debtor_id', 'creditor_id', 'immovable_id', 'final_date', 'start_date'])
             ->with([
                 'immovable:id,registration',
                 'debtor:id,name', 'creditor:id,name'
@@ -75,9 +75,13 @@ class CommonRepository extends Repository {
 
         $list->interests = $this->mortgage->where('state', MortgageState::Valid)->get()->map(function (Mortgage $mortgage) {
             return collect($this->mortgageRepository->getInterests($mortgage->id))->filter(function ($int) {
-                return Carbon::now()->addDays(65)->greaterThanOrEqualTo($int['from_date']) &&
+                return Carbon::now()->addDays(5)->greaterThanOrEqualTo($int['from_date']) &&
                     $int['state'] != InterestState::Paid;
-            })->values();
+            })->values()->map(function ($i) use ($mortgage) {
+                $i['debtor'] = $mortgage->debtor->name;
+                $i['mortgage_id'] = $mortgage->id;
+                return $i;
+            })->last();
         })->filter(function ($v) {
             return count($v);
         })->values();

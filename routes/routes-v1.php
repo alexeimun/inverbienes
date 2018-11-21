@@ -50,6 +50,14 @@ $router->group(['prefix' => 'mortgage'], function () use ($router) {
             ->get('{id}', 'ImmovableController@show')
             ->delete('{id}', 'ImmovableController@softDestroy');
     });
+
+    /**
+     * Credit session routes
+     */
+    $router->group(['prefix' => 'credit-session'], function () use ($router) {
+        $router->post('debtor', 'MortgageController@transferMortgageDebtor')
+            ->post('creditor', 'MortgageController@transferMortgageCreditor');
+    });
 });
 
 $router->group(['prefix' => 'financial'], function () use ($router) {
@@ -68,8 +76,10 @@ $router->group(['prefix' => 'financial'], function () use ($router) {
      * Report routes
      */
     $router->group(['prefix' => 'report'], function () use ($router) {
-        $router->get('debtor/{id}/{from}/{to}', 'ReportController@debtor');
-        $router->get('daily_incomes/{date}', 'ReportController@dailyIncomes');
+        $router->get('debtor/{id}/{from}/{to}', 'ReportController@debtor')
+            ->get('creditor/{id}/{from}/{to}', 'ReportController@creditor')
+            ->get('daily_incomes/{date}', 'ReportController@dailyIncomes')
+            ->get('daily_block/{date}', 'ReportController@dailyBlock');
     });
 });
 

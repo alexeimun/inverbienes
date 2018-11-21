@@ -85,6 +85,7 @@ class InvoiceRepository extends Repository {
                 $mortgage->decrement('capital', $payment['value']);
             } else if($payment['type'] == PaymentType::IncreaseCapital) {
                 $mortgage->increment('capital', $payment['capital_increase']);
+                $mortgage->increment('current_balance', $payment['capital_increase']);
             } else if($payment['type'] == PaymentType::PeriodExtended) {
                 $mortgage->final_date = Carbon::parse($mortgage->final_date)->addMonths($payment['period']);
                 $mortgage->save();

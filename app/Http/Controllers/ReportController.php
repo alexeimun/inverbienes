@@ -16,8 +16,16 @@ class ReportController extends Controller {
         return $this->response($this->repository->reportDebtor($id, $from, $to));
     }
 
+    public function creditor($id, $from, $to) {
+        return $this->response($this->repository->reportCreditor($id, $from, $to));
+    }
+
     public function dailyIncomes($date) {
         return $this->response($this->repository->dailyIncomes($date));
+    }
+
+    public function dailyBlock($date) {
+        return $this->response($this->repository->dailyBlock($date));
     }
 }
 

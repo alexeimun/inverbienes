@@ -51,4 +51,11 @@ class Creditor extends Model {
     public function city() {
         return $this->belongsTo(City::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function mortgages() {
+        return $this->hasMany(Mortgage::class);
+    }
 }

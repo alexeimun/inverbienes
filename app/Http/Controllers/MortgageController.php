@@ -19,5 +19,13 @@ class MortgageController extends Controller {
     public function getPayments($id) {
         return $this->response($this->repository->getPayments($id));
     }
+
+    public function transferMortgageCreditor() {
+        return $this->response($this->repository->transferMortgageCreditor($this->request->all()));
+    }
+
+    public function transferMortgageDebtor() {
+        return $this->response($this->repository->transferMortgageDebtor($this->request->all()));
+    }
 }
 

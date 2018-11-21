@@ -24,8 +24,9 @@ class DebtorRepository extends Repository {
         }
         return $debtor;
     }
+
     public function all($columns = ['*']) {
-       return $this->model->with('references')->get();
+        return $this->model->with('references')->get();
     }
 
 }
